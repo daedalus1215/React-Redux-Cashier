@@ -28,7 +28,7 @@ export default class GroceryCart extends Component {
                     {this.props.items.map((item, index) => {
                         return <tr key={index}>
                             <td>
-                                <button>
+                                <button onClick={() => this.props.removeFromCart(index)}>
                                     Remove From Cart
                                 </button>
                             </td>

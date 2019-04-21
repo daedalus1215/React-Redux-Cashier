@@ -11,6 +11,7 @@ export default class App extends Component {
             cart: []
         }
         this.addToCart = this.addToCart.bind(this);
+        this.deleteFromCart = this.deleteFromCart.bind(this);
     }
 
 
@@ -19,11 +20,11 @@ export default class App extends Component {
         this.setState({cart});
     }
 
-    // deleteFromCart(item) {
-    //     const cart = [...this.state.cart];
-    //     cart.splice(item, 0);
-    //     this.setState({cart});
-    // }
+    deleteFromCart(index) {
+        const cart = [...this.state.cart];
+        cart.splice(index, 1);
+        this.setState({cart});
+    }
 
     render() {
         return (
@@ -32,7 +33,7 @@ export default class App extends Component {
                 <p>Here's is my react App default component</p>
                 <div id="grocery-container">
                     <GroceryItems addToCart={this.addToCart}/>
-                    <GroceryCart items={this.state.cart} />
+                    <GroceryCart items={this.state.cart} removeFromCart={this.deleteFromCart}/>
                 </div>
             </div>
         );
