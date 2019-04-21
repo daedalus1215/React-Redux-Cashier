@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 
 
 export default class GroceryCart extends Component {
+    total() {
+        return this.props.items.reduce((total, item) => {
+            return total + item.price;
+        }, 0);
+    }
+
+
     render() {
-        if (this.props.items) {
+        if (this.props.items.length === 0) {
             return <div className="grocery-cart">
                 <p>Cart is empty</p>
             </div>
@@ -19,10 +26,10 @@ export default class GroceryCart extends Component {
                     </tbody>
                     <tbody>
                     {this.props.items.map((item, index) => {
-                        return <tr id={index}>
+                        return <tr key={index}>
                             <td>
                                 <button>
-                                    Add to cart
+                                    Remove From Cart
                                 </button>
                             </td>
                             <td>{item.price}</td>
@@ -33,7 +40,7 @@ export default class GroceryCart extends Component {
                 </table>
 
                 <p>
-                    Total: $0.00
+                    Total: ${this.total()}
                 </p>
 
             </div>
