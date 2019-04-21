@@ -38,7 +38,6 @@ const GROCERY_ITEMS = [
 
 export default class GroceryItems extends Component {
     render() {
-
         return (
             <div className="grocery-items">
                 <table>
