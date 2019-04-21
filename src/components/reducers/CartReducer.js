@@ -54,7 +54,12 @@ const CartReducer = (state, action) => {
             };
         }
         case 'REMOVE_FROM_CART': {
-
+            const cart = [...state.cart];
+            cart.splice(action.index, 1);
+            return {
+                ...state,
+                cart: cart
+            }
         }
         default: {
             return state;
