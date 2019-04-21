@@ -3,34 +3,34 @@ import React, { Component } from 'react';
 
 const GROCERY_ITEMS = [
     {
-        name: "Bacon", price: "5.79"
+        name: "Bacon", price: 5.79
     },
     {
-        name: "Hotdogs", price: "0.79"
+        name: "Hotdogs", price: 0.79
     },
     {
-        name: "Beans", price: "0.79"
+        name: "Beans", price: 0.79
     },
     {
-        name: "Jelly", price: "7.79"
+        name: "Jelly", price: 7.79
     },
     {
-        name: "Peanut Butter", price: "2.79"
+        name: "Peanut Butter", price: 2.79
     },
     {
-        name: "Butter", price: "0.79"
+        name: "Butter", price: 0.79
     },
     {
-        name: "Milk", price: "0.79"
+        name: "Milk", price: 0.79
     },
     {
-        name: "Sugar", price: "5.00"
+        name: "Sugar", price: 5.00
     },
     {
-        name: "Bars", price: "2.79"
+        name: "Bars", price: 2.79
     },
     {
-        name: "Veggies", price: "1.79"
+        name: "Veggies", price: 1.79
     },
 ];
 
