@@ -14,10 +14,16 @@ export default class App extends Component {
     }
 
 
-    addToCart(items) {
+    addToCart(item) {
         const cart = [...this.state.cart, item];
         this.setState({cart});
     }
+
+    // deleteFromCart(item) {
+    //     const cart = [...this.state.cart];
+    //     cart.splice(item, 0);
+    //     this.setState({cart});
+    // }
 
     render() {
         return (
