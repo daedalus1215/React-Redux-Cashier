@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
 
-export default class GroceryCart extends Component {
+class GroceryCart extends Component {
     total() {
         return this.props.items.reduce((total, item) => {
             return total + item.price;
@@ -47,3 +48,23 @@ export default class GroceryCart extends Component {
         );
     }
 }
+
+
+function mapStateToProps(state) {
+    return {
+        items: state.cart
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        removeFromCart: (index) => {
+            dispatch({
+                type: 'REMOVE_FROM_CART',
+                index: index
+            });
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GroceryCart)
