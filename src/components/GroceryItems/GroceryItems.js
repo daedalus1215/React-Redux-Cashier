@@ -40,9 +40,9 @@ export default class GroceryItems extends Component {
     render() {
 
         return (
-            <div>
+            <div className="grocery-items">
                 <table>
-                    <tbody>
+                    <tbody border="1">
                     <tr>
                         <th>Item Price</th>
                         <th>Item Name</th>
@@ -51,6 +51,11 @@ export default class GroceryItems extends Component {
                     <tbody>
                     {GROCERY_ITEMS.map((item, index) => {
                         return <tr id={index}>
+                            <td>
+                                <button>
+                                    Add to cart
+                                </button>
+                            </td>
                             <td>{item.price}</td>
                             <td>{item.name}</td>
                         </tr>                        
