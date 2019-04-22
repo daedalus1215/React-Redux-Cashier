@@ -67,9 +67,15 @@ const CartReducer = (state, action) => {
         case 'ADD_TO_CART': {
             const cart = [...state.cart, action.item];        
             
-            const history = [...state.history, cart];
-            const historyIndex = state.historyIndex + 1;
+            // copy all of the history
+            const history = [...state.history];
+            // chop off all recorded future history that happened after this point in time.
 
+            // add the current cart state tot he end of the history array
+            history.push(cart);
+            // mark our historyIndex as being the last thing in the array
+            const historyIndex = state.historyIndex - 1;
+            
             return {
                 ...state,
                 cart,
