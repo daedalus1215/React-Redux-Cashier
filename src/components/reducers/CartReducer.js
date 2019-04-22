@@ -39,26 +39,56 @@ const CartReducer = (state, action) => {
     if (state === undefined) {
         return {
             forSale: GROCERY_ITEMS,
-            cart: []
+            cart: [],
+            history: [[]],
+            historyIndex: 0
         }
     }
 
     switch (action.type) {
-        case 'ADD_TO_CART': {
-            console.log('add to cart');
-            const cart = [...state.cart, action.item];        
-            
+        case 'UNDO': {
+            let historyIndex = state.historyIndex - 1;
+            historyIndex = Math.max(historyIndex, 0); // prevent negative numbers
             return {
                 ...state,
-                cart: cart
+                cart: state.history[historyIndex],
+                historyIndex,
+            }
+        }
+        case 'REDO': {
+            let historyIndex = state.historyIndex + 1;
+            historyIndex = Math.min(historyIndex, state.history.length - 1); // prevent going higher than the array has of items
+            return {
+                ...state,
+                cart: state.history[historyIndex],
+                historyIndex,
+            }
+        }
+        case 'ADD_TO_CART': {
+            const cart = [...state.cart, action.item];        
+            
+            const history = [...state.history, cart];
+            const historyIndex = state.historyIndex + 1;
+
+            return {
+                ...state,
+                cart,
+                history,
+                historyIndex
             };
         }
         case 'REMOVE_FROM_CART': {
             const cart = [...state.cart];
             cart.splice(action.index, 1);
+
+            const history = [...state.history, cart];
+            const historyIndex = state.historyIndex + 1;
+
             return {
                 ...state,
-                cart: cart
+                cart,
+                history,
+                historyIndex
             }
         }
         default: {
