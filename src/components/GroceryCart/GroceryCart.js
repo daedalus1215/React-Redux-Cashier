@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import { removeFromCart } from '../reducers/actions';
 
 
 class GroceryCart extends Component {
@@ -59,10 +60,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         removeFromCart: (index) => {
-            dispatch({
-                type: 'REMOVE_FROM_CART',
-                index: index
-            });
+            dispatch(removeFromCart(index));
         }
     }
 }

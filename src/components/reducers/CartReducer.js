@@ -1,3 +1,5 @@
+import {UNDO, REDO, ADD_TO_CART, REMOVE_FROM_CART } from './actions.js';
+
 const GROCERY_ITEMS = [
     {
         name: "Bacon", price: 5.79
@@ -31,9 +33,6 @@ const GROCERY_ITEMS = [
     },
 ];
 
-
-
-
 const CartReducer = (state, action) => {
     console.log("action: ", action);
     if (state === undefined) {
@@ -46,7 +45,7 @@ const CartReducer = (state, action) => {
     }
 
     switch (action.type) {
-        case 'UNDO': {
+        case UNDO: {
             let historyIndex = state.historyIndex - 1;
             historyIndex = Math.max(historyIndex, 0); // prevent negative numbers
             return {
@@ -55,7 +54,7 @@ const CartReducer = (state, action) => {
                 historyIndex,
             }
         }
-        case 'REDO': {
+        case REDO: {
             let historyIndex = state.historyIndex + 1;
             historyIndex = Math.min(historyIndex, state.history.length - 1); // prevent going higher than the array has of items
             return {
@@ -64,17 +63,19 @@ const CartReducer = (state, action) => {
                 historyIndex,
             }
         }
-        case 'ADD_TO_CART': {
+        case ADD_TO_CART: {
             const cart = [...state.cart, action.item];        
             
             // copy all of the history
             const history = [...state.history];
             // chop off all recorded future history that happened after this point in time.
+            // Performing actions in the past destroys all of the prev future. You can't go back to the future.
+            history.splice(state.historyIndex + 1, history.length);
 
             // add the current cart state tot he end of the history array
             history.push(cart);
             // mark our historyIndex as being the last thing in the array
-            const historyIndex = state.historyIndex - 1;
+            const historyIndex = state.history.length - 1;
             
             return {
                 ...state,
@@ -83,12 +84,16 @@ const CartReducer = (state, action) => {
                 historyIndex
             };
         }
-        case 'REMOVE_FROM_CART': {
+        case REMOVE_FROM_CART: {
             const cart = [...state.cart];
             cart.splice(action.index, 1);
 
-            const history = [...state.history, cart];
-            const historyIndex = state.historyIndex + 1;
+            // copy all of the history
+            const history = [...state.history];
+            history.splice(state.historyIndex + 1, state.history.length);
+            
+            history.push(cart);
+            const historyIndex = state.history.length - 1;
 
             return {
                 ...state,

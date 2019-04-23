@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { undo, redo } from '../reducers/actions.js';
 
 
 class History extends Component {
@@ -14,16 +15,8 @@ class History extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        undo: () => {
-            dispatch({
-                type: "UNDO"
-            });
-        },
-        redo: () => {
-            dispatch({
-                type: "REDO"
-            });
-        }
+        undo: () => dispatch(undo()),        
+        redo: () => dispatch(redo())      
     }
 }
 

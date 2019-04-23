@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import { addToCart } from '../reducers/actions';
 
 
 
@@ -44,12 +45,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addToCart: (item) => {
-            dispatch({
-                type: 'ADD_TO_CART',
-                item: item
-            });
-        }
+        addToCart: (item) => dispatch(addToCart(item))
     }
 }
 
